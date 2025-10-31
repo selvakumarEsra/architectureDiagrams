@@ -1,0 +1,229 @@
+<mxfile host="app.diagrams.net" modified="2025-10-31T00:00:00.000Z" agent="Claude" version="21.0.0" etag="recovery-error-handling" type="device">
+  <diagram name="Recovery &amp; Error Handling" id="recovery-error-handling">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- Title -->
+        <mxCell id="title" value="Recovery &amp; Error Handling Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="500" y="40" width="600" height="40" as="geometry"/>
+        </mxCell>
+        
+        <!-- Message Entry Point -->
+        <mxCell id="msg_entry" value="Message Received&lt;br&gt;by GLGEN Consumer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="680" y="120" width="240" height="60" as="geometry"/>
+        </mxCell>
+        
+        <!-- Processing Decision -->
+        <mxCell id="processing" value="Message&lt;br&gt;Processing" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="710" y="220" width="180" height="100" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="arrow1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="msg_entry" target="processing">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Success Path -->
+        <mxCell id="success" value="✓ Successfully Processed&lt;br&gt;Update DB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13" vertex="1" parent="1">
+          <mxGeometry x="950" y="240" width="200" height="60" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="arrow_success" value="Success" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;fontColor=#009900;fontStyle=1" edge="1" parent="1" source="processing" target="success">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Error Decision -->
+        <mxCell id="error_type" value="Error&lt;br&gt;Type?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=13;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="710" y="380" width="180" height="100" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="arrow_error" value="Error/Failure" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;fontColor=#cc0000;fontStyle=1" edge="1" parent="1" source="processing" target="error_type">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Container for Recoverable -->
+        <mxCell id="recoverable_container" value="1. RECOVERABLE MESSAGE" style="swimlane;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;startSize=40" vertex="1" parent="1">
+          <mxGeometry x="80" y="530" width="380" height="280" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="recoverable_desc" value="Self-Healing Mechanism" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;fontSize=12;fontStyle=1" vertex="1" parent="recoverable_container">
+          <mxGeometry x="20" y="60" width="340" height="40" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="retry_logic" value="GLGEN Consumer&lt;br&gt;Retry for Configured Times" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#10739e;fontSize=12" vertex="1" parent="recoverable_container">
+          <mxGeometry x="60" y="120" width="260" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="recoverable_issues" value="Handles Intermittent Issues:&lt;br&gt;• DB Connection&lt;br&gt;• Network Issues&lt;br&gt;• Service Unavailability" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#10739e;align=left;fontSize=11" vertex="1" parent="recoverable_container">
+          <mxGeometry x="40" y="185" width="300" height="75" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="arrow_recoverable" value="Recoverable" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;fontColor=#0066cc;fontStyle=1" edge="1" parent="1" source="error_type" target="recoverable_container">
+          <mxGeometry x="-0.2" relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Container for Unrecoverable -->
+        <mxCell id="unrecoverable_container" value="2. UNRECOVERABLE ERROR/FAILED MESSAGES" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;fontStyle=1;startSize=40" vertex="1" parent="1">
+          <mxGeometry x="520" y="530" width="680" height="530" as="geometry"/>
+        </mxCell>
+        
+        <!-- Small Volume Errors Section -->
+        <mxCell id="small_vol_container" value="A. SMALL VOLUME ERRORS" style="swimlane;whiteSpace=wrap;html=1;fillColor=#ffe6e6;strokeColor=#b85450;fontSize=13;fontStyle=1;startSize=35" vertex="1" parent="unrecoverable_container">
+          <mxGeometry x="20" y="60" width="640" height="200" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="error_table" value="Store in Error Table" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=12" vertex="1" parent="small_vol_container">
+          <mxGeometry x="30" y="50" width="160" height="40" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="alerts" value="Raise Alerts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=12" vertex="1" parent="small_vol_container">
+          <mxGeometry x="220" y="50" width="160" height="40" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="admin_ui" value="L1/L2 Team&lt;br&gt;Admin UI Visualization" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=12" vertex="1" parent="small_vol_container">
+          <mxGeometry x="410" y="50" width="200" height="40" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="modify_msg" value="L1/L2 User Modifies&lt;br&gt;Individual Message" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12" vertex="1" parent="small_vol_container">
+          <mxGeometry x="120" y="115" width="180" height="45" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="republish" value="Republish to Repair Topic" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12" vertex="1" parent="small_vol_container">
+          <mxGeometry x="340" y="115" width="180" height="45" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="reprocess" value="GLGEN Re-process &amp;&lt;br&gt;Update DB Successfully" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1" vertex="1" parent="small_vol_container">
+          <mxGeometry x="550" y="115" width="70" height="45" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="arrow_small1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="small_vol_container" source="error_table" target="modify_msg">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="arrow_small2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="small_vol_container" source="modify_msg" target="republish">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="arrow_small3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="small_vol_container" source="republish" target="reprocess">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- High Volume Errors Section -->
+        <mxCell id="high_vol_container" value="B. HIGH VOLUME ERRORS" style="swimlane;whiteSpace=wrap;html=1;fillColor=#ffe6e6;strokeColor=#b85450;fontSize=13;fontStyle=1;startSize=35" vertex="1" parent="unrecoverable_container">
+          <mxGeometry x="20" y="280" width="640" height="230" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="high_vol_scenario" value="Scenario: Replay all messages&lt;br&gt;for entire day or high volume" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=1" vertex="1" parent="high_vol_container">
+          <mxGeometry x="30" y="50" width="260" height="45" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="reset_offset" value="Reset SGEN Consumer&lt;br&gt;(--reset-offsets)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=12;fontStyle=1" vertex="1" parent="high_vol_container">
+          <mxGeometry x="330" y="50" width="280" height="45" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="replay_all" value="All Messages Replayed" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1" vertex="1" parent="high_vol_container">
+          <mxGeometry x="400" y="120" width="210" height="40" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="prereq_high" value="📋 PRE-REQUISITES:&lt;br&gt;1. GLGEN must be idempotent&lt;br&gt;   (handle duplicate via upsert)&lt;br&gt;2. Kafka topic retention: 1-2 days" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#1976d2;align=left;fontSize=11;fontStyle=1" vertex="1" parent="high_vol_container">
+          <mxGeometry x="30" y="120" width="330" height="90" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="arrow_high1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="high_vol_container" source="high_vol_scenario" target="reset_offset">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="arrow_high2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="high_vol_container" source="reset_offset" target="replay_all">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="arrow_unrecoverable" value="Unrecoverable" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;fontColor=#cc0000;fontStyle=1" edge="1" parent="1" source="error_type" target="unrecoverable_container">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Container for Upstream Republish -->
+        <mxCell id="upstream_container" value="3. UPSTREAM REPUBLISH" style="swimlane;whiteSpace=wrap;html=1;fillColor=#e1bee7;strokeColor=#8e24aa;fontSize=14;fontStyle=1;startSize=40" vertex="1" parent="1">
+          <mxGeometry x="1240" y="530" width="320" height="280" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="upstream_scenario" value="Scenario:&lt;br&gt;Issues with Upstream System" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f3e5f5;strokeColor=#8e24aa;fontSize=12;fontStyle=1" vertex="1" parent="upstream_container">
+          <mxGeometry x="30" y="60" width="260" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="upstream_republish" value="Upstream Republishes&lt;br&gt;Entire Data Again" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#8e24aa;fontSize=12;fontStyle=1" vertex="1" parent="upstream_container">
+          <mxGeometry x="60" y="130" width="200" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="prereq_upstream" value="📋 PRE-REQUISITE:&lt;br&gt;GLGEN must be idempotent" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#1976d2;align=left;fontSize=11;fontStyle=1" vertex="1" parent="upstream_container">
+          <mxGeometry x="40" y="200" width="240" height="60" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="arrow_upstream1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="upstream_container" source="upstream_scenario" target="upstream_republish">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="arrow_upstream_main" value="Upstream Issues" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;fontColor=#8e24aa;fontStyle=1" edge="1" parent="1" source="unrecoverable_container" target="upstream_container">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1400" y="530"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Legend -->
+        <mxCell id="legend_container" value="LEGEND" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=13;fontStyle=1;startSize=30" vertex="1" parent="1">
+          <mxGeometry x="80" y="860" width="380" height="200" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="legend1" value="Success State" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11" vertex="1" parent="legend_container">
+          <mxGeometry x="20" y="45" width="160" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="legend2" value="Error/Failed State" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11" vertex="1" parent="legend_container">
+          <mxGeometry x="200" y="45" width="160" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="legend3" value="Recoverable Path" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11" vertex="1" parent="legend_container">
+          <mxGeometry x="20" y="90" width="160" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="legend4" value="Decision Point" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11" vertex="1" parent="legend_container">
+          <mxGeometry x="240" y="85" width="100" height="40" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="legend5" value="Pre-requisites" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#1976d2;fontSize=11" vertex="1" parent="legend_container">
+          <mxGeometry x="20" y="140" width="160" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="legend6" value="Upstream Flow" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1bee7;strokeColor=#8e24aa;fontSize=11" vertex="1" parent="legend_container">
+          <mxGeometry x="200" y="140" width="160" height="30" as="geometry"/>
+        </mxCell>
+        
+        <!-- Key Notes -->
+        <mxCell id="notes_container" value="KEY ARCHITECTURAL NOTES" style="swimlane;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#d6b656;fontSize=13;fontStyle=1;startSize=35" vertex="1" parent="1">
+          <mxGeometry x="520" y="860" width="680" height="200" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="note1" value="✓ GLGEN Consumer implements self-healing with configurable retry logic" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;align=left;fontSize=11" vertex="1" parent="notes_container">
+          <mxGeometry x="20" y="50" width="640" height="25" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="note2" value="✓ Idempotency is critical - GLGEN must handle duplicates via upsert operations" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;align=left;fontSize=11" vertex="1" parent="notes_container">
+          <mxGeometry x="20" y="85" width="640" height="25" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="note3" value="✓ Kafka topic retention of 1-2 days enables high-volume message replay scenarios" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;align=left;fontSize=11" vertex="1" parent="notes_container">
+          <mxGeometry x="20" y="120" width="640" height="25" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="note4" value="✓ Three-tier approach: Self-healing → Manual intervention → Full reset/replay" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;align=left;fontSize=11" vertex="1" parent="notes_container">
+          <mxGeometry x="20" y="155" width="640" height="25" as="geometry"/>
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
