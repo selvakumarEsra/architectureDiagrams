@@ -1,0 +1,345 @@
+<mxfile host="app.diagrams.net" modified="2025-11-07T00:00:00.000Z" agent="Claude" version="22.0.0" etag="xyz" type="device">
+  <diagram name="Message Processing Pipeline" id="pipeline">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Title and Topics -->
+        <mxCell id="title" value="Topics&#xa;Kafka" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="100" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="topic1" value="1. Txn" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="90" width="80" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="topic2" value="2. Batch" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="115" width="80" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="topic3" value="3. Acc" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="140" width="80" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="topic4" value="4. Ctrl Txn" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="190" width="100" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="topic5" value="5. Ctrl Batch" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="215" width="100" height="20" as="geometry" />
+        </mxCell>
+        
+        <!-- Main Processing Flow (Top) -->
+        <mxCell id="consume1" value="Consume&#xa;Kafka&#xa;topic" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="200" y="90" width="100" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="retry1" value="Retry" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="200" y="200" width="60" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="mandatory" value="Mandatory&#xa;check" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="360" y="90" width="100" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="mand_retry" value="Retry" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="360" y="200" width="60" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="mand_issue" value="issue" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="430" y="200" width="60" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="mand_upstream" value="upstream&#xa;error" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="500" y="200" width="70" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="optional" value="Optional&#xa;Check" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="540" y="90" width="100" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="opt_upstream" value="Upstream&#xa;error" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="540" y="200" width="70" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="transform" value="transform" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="720" y="90" width="100" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="trans_retry" value="Retry" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="720" y="200" width="60" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="savedb" value="Save&#xa;DB" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="880" y="40" width="80" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="metric_duration" value="Metric&#xa;Duration/ion" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="40" width="100" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="duration_note" value="- Duration&#xa;- component" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="110" width="100" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Second Processing Flow (Bottom) -->
+        <mxCell id="consume2" value="Consume&#xa;Kafka&#xa;topic" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="200" y="340" width="100" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- Trigger Engine Box (Red) -->
+        <mxCell id="trigger_box" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#FF0000;strokeWidth=2;fillColor=none;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="280" width="380" height="180" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="trigger" value="Trigger&#xa;engine" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="400" y="340" width="100" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="recoverable" value="Recoverable&#xa;retry" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="220" width="120" height="70" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="unrecord" value="Unrecord&#xa;code issue" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="820" y="310" width="100" height="70" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="gyardian" value="Gyardian" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="960" y="330" width="80" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="upstream2" value="Upstream" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="820" y="400" width="100" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Error Handling Section -->
+        <mxCell id="retryarch" value="Retryarch" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="60" y="520" width="100" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="retry3" value="Retry&#xa;3 times" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="60" y="600" width="80" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="move" value="move" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="60" y="700" width="60" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="save_error1" value="Save to&#xa;Error DB" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="60" y="780" width="90" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="alert1" value="alert" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="60" y="880" width="60" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="alert1_level" value="L1/L2/Day" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="130" y="885" width="70" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Unrecordable Code Issue Path -->
+        <mxCell id="unrecord_issue" value="Unrecordable&#xa;code issue" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="280" y="520" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="metrics1" value="metrics" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="300" y="640" width="80" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="save_error2" value="Save to&#xa;Error DB" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="295" y="740" width="90" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="alert2" value="alert" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="310" y="840" width="60" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="alert2_level" value="L1/L2/Day" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="380" y="845" width="70" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Upstream Path -->
+        <mxCell id="upstream3" value="Upstream" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="520" y="520" width="100" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="metrics2" value="metrics" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="530" y="640" width="80" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="save_error3" value="Save to&#xa;Error DB" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="525" y="740" width="90" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="alert3" value="alert" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="540" y="840" width="60" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="alert3_level" value="L1/L2/Day" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="610" y="845" width="70" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Error Process Box (Red) -->
+        <mxCell id="error_box" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FF0000;strokeWidth=2;fillColor=none;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="920" y="430" width="280" height="200" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="opt_fail" value="opt&#xa;check fail" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="940" y="450" width="90" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="error_proc1" value="Error process" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="450" width="100" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="file_pass" value="file status = pass" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="500" width="120" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="mand_fail" value="mand.&#xa;fail" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="940" y="550" width="80" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="error_proc2" value="error process" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="555" width="100" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="file_fail" value="file status = fail" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="605" width="120" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Metric Box -->
+        <mxCell id="metric_box" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FF0000;strokeWidth=2;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="920" y="680" width="280" height="140" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="metric_title" value="Metric" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="930" y="690" width="80" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="metric_type" value="- type: Recoverable/unrecord" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="930" y="720" width="180" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="metric_comp" value="- component: Error, Acc, Batch" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="930" y="745" width="200" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="metric_msg" value="- error Msg: (retry)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="930" y="770" width="150" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="metric_count" value="- count: 1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="930" y="795" width="100" height="20" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrows/Connectors -->
+        <!-- Top flow -->
+        <mxCell id="arrow1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0000FF;strokeWidth=2;" edge="1" parent="1" source="consume1" target="mandatory">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0000FF;strokeWidth=2;" edge="1" parent="1" source="mandatory" target="optional">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0000FF;strokeWidth=2;" edge="1" parent="1" source="optional" target="transform">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0000FF;strokeWidth=2;" edge="1" parent="1" source="transform" target="savedb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0000FF;strokeWidth=2;" edge="1" parent="1" source="savedb" target="metric_duration">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Bottom flow -->
+        <mxCell id="arrow6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0000FF;strokeWidth=2;" edge="1" parent="1" source="consume2" target="trigger">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0000FF;strokeWidth=2;" edge="1" parent="1" source="trigger" target="recoverable">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0000FF;strokeWidth=2;" edge="1" parent="1" source="trigger" target="unrecord">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0000FF;strokeWidth=2;" edge="1" parent="1" source="trigger" target="upstream2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0000FF;strokeWidth=2;" edge="1" parent="1" source="unrecord" target="gyardian">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Retry paths -->
+        <mxCell id="arrow11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0000FF;strokeWidth=2;" edge="1" parent="1" source="retryarch" target="retry3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0000FF;strokeWidth=2;" edge="1" parent="1" source="retry3" target="move">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0000FF;strokeWidth=2;" edge="1" parent="1" source="move" target="save_error1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0000FF;strokeWidth=2;" edge="1" parent="1" source="save_error1" target="alert1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Unrecordable path -->
+        <mxCell id="arrow15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0000FF;strokeWidth=2;" edge="1" parent="1" source="unrecord_issue" target="metrics1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0000FF;strokeWidth=2;" edge="1" parent="1" source="metrics1" target="save_error2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0000FF;strokeWidth=2;" edge="1" parent="1" source="save_error2" target="alert2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Upstream path -->
+        <mxCell id="arrow18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0000FF;strokeWidth=2;" edge="1" parent="1" source="upstream3" target="metrics2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0000FF;strokeWidth=2;" edge="1" parent="1" source="metrics2" target="save_error3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0000FF;strokeWidth=2;" edge="1" parent="1" source="save_error3" target="alert3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Error process -->
+        <mxCell id="arrow21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0000FF;strokeWidth=2;" edge="1" parent="1" source="opt_fail" target="error_proc1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0000FF;strokeWidth=2;" edge="1" parent="1" source="mand_fail" target="error_proc2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Connection from Recoverable to Error Box -->
+        <mxCell id="arrow23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF0000;strokeWidth=2;dashed=1;" edge="1" parent="1" source="recoverable" target="error_box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Connection from Error Box to Metric Box -->
+        <mxCell id="arrow24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF0000;strokeWidth=2;dashed=1;" edge="1" parent="1" source="error_box" target="metric_box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
